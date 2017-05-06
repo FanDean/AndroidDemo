@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fandean.cardview.R;
@@ -40,7 +41,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Album  album = mAlbumList.get(position);
         holder.mTitle.setText(album.getName());
-        holder.mCount.setText(album.getNumOfSongs());
+        holder.mCount.setText(album.getNumOfSongs() + " songs");
 
         Glide.with(mContext).load(album.getThumbnail()).into(holder.mThumbnail);
 
@@ -82,10 +83,13 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
             //TODO PopupMenuItemClick 事件处理
             switch (item.getItemId()){
                 case R.id.action_add_favourite:
-
+                    Toast.makeText(mContext,"添加到收藏夹（未实现）",Toast.LENGTH_SHORT).show();
+                    return true;
                 case R.id.action_play_next:
-
+                    Toast.makeText(mContext,"播放下一首（未实现）",Toast.LENGTH_SHORT).show();
+                    return true;
             }
+            //返回false,表明让事件继续向外传播
             return false;
         }
     }

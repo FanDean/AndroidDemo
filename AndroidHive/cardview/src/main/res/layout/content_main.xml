@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:background="@color/viewBg"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context=".activity.MainActivity"
+                tools:showIn="@layout/activity_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+<!--
+ 注意上面的 app:layout_behavior 的使用。
+ 注意到有个属性：app:layout_behavior="@string/appbar_scrolling_view_behavior",它就是指定Behavior的，
+ appbar_scrolling_view_behavior对应的类的名称是：
+ android.support.design.widget.AppBarLayout$ScrollingViewBehavior感兴趣的可以去分析源码。
+
+ tools:showIn 指示该布局可在activity_main布局文件中预览。
+ tools命名空间的使用见印象笔记。
+-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+<!--
+    clipToPadding 的作用：
+    主要用途：常常用于paddingTop，假设 内部有个属性设置了PaddingTop但是滑动的时候就忽视paddingTop的则使该属性
+    android:clipToPadding=false；在此是为了在滚动时消除RecycleerView(或其Item)带来的上内边距paddingTop。
+-->
+        </android.support.v7.widget.RecyclerView>
+</RelativeLayout>
