@@ -93,12 +93,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (scrollRange == -1){
-                    //获取AppBarLayout的滑动距离
+                    //获取AppBarLayout的最大滑动距离
                     scrollRange = appBarLayout.getTotalScrollRange();
                     Log.d("fandean", "1 偏移距离TotalScrollRange： " + scrollRange);
                     Log.d("fandean", "1 verticalOffset: 垂直偏移量： " + verticalOffset);
                 }
                 //verticalOffset: 垂直偏移量
+                //已经为最大滑动距离
                 if (scrollRange + verticalOffset == 0){
                     //设置标题
                     collapsingToolbarLayout.setTitle("View Card");

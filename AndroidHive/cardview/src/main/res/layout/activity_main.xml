@@ -10,7 +10,7 @@
 
     <!--
         AppBarLayout继承自LinearLayout，所以其布局方向为垂直方向（子View默认垂直排列），
-        它可以让你定制当某个可滚动View（ScrollView)的滚动手势发生变化时，其内部的子View实现何种动作。
+        它可以让你定制当某个可滚动View（默认提供了NestedScrollView)的滚动手势发生变化时，其内部的子View实现何种动作。
 
         重点： 通过设置子View的 layout_scrollFlags参数，来控制AppBarLayout中子View的行为
             scroll: 该子View会跟随滚动事件一起发生滚动
