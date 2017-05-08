@@ -1,6 +1,8 @@
 # Image Gallery App
 [Android Glide Image Library – Building Image Gallery App](http://www.androidhive.info/2016/04/android-glide-image-library-building-image-gallery-app/)  
 
+![图片](./ImageGallery.gif)
+
 ## 用到的知识点
 
 - Glide

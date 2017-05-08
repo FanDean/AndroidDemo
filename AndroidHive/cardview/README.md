@@ -2,6 +2,7 @@
 
 [Android working with Card View and Recycler View](http://www.androidhive.info/2016/05/android-working-with-card-view-and-recycler-view/)  
 
+![图片示例](./CardView.gif)
 
 ## 使用到的知识
 

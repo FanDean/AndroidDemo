@@ -1,5 +1,9 @@
 # android working with webview building a simple in app browser
+
 [android-working-with-webview-building-a-simple-in-app-browser](http://www.androidhive.info/2016/12/android-working-with-webview-building-a-simple-in-app-browser/)  
+
+
+![图片示例](./WebView.gif)
 
 ## 用到的知识
 - WebView的使用，和加载apk包中的html和css
@@ -38,14 +42,14 @@ WebView常用子类：
 参考： [Android开发：最全面、最易懂的Webview使用详解](http://www.jianshu.com/p/3c94ae673e2a#)  
 
 
-在API21中，WebViewClient的shouldOverrideUrlLoading()方法并不会被触发
+在我的小米2S的API21中，WebViewClient的shouldOverrideUrlLoading()方法并不会被触发
 
-而在API24中，该方法会被触发。
+而在虚拟机的API24中，该方法会被触发。
 
-需要做版本适配。
+可能是WebView的问题，或者...，可以考虑适配相应版本。
 
 ## Menu
-API 24中，系统会自动处理action bar上的Home/Up按钮点击事件。
+系统会自动处理action bar上的Home/Up按钮点击事件。
 
 Activity的invalidateOptionsMenu()方法，用于声明Menu已经发生改变，应该重新创建。
 
