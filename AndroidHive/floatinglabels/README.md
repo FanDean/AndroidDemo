@@ -19,6 +19,7 @@
 - 验证表单数据（用户输入），比如使用系统自带正则工具校验email地址
 - 为EditText设置，TextChange... 监听器。（已更改为监听焦点的改变）
 - `android:drawableStart="@drawable/email"` 为EditText左边开始处添加一个图片
+- 在xml中直接通过属性设置EditText的maxLength，inputType等
 
 ### View.requestFocus()
 

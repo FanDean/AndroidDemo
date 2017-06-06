@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/cardview" />
             <option value="$PROJECT_DIR$/floatinglabels" />
+            <option value="$PROJECT_DIR$/swiperefresh" />
             <option value="$PROJECT_DIR$/webview" />
           </set>
         </option>

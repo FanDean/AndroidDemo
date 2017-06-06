@@ -8,12 +8,12 @@ AndroidHive目录下的Demo全部参考[AndroidHive](http://www.androidhive.info
 - Android Glide Image Library – Building Image Gallery App
 - Android working with Card View and Recycler View
 - android working with webview building a simple in app browser
+- [Android Material Design Floating Labels for EditText](http://www.androidhive.info/2015/09/android-material-design-floating-labels-for-edittext/)  
 
 
-## 未完成的几个好Demo
+## 未完成的Demo
 
 - [Android Getting Started with Firebase – Login and Registration Authentication](http://www.androidhive.info/2016/06/android-getting-started-firebase-simple-login-registration-auth/)  
-- [Android Material Design Floating Labels for EditText](http://www.androidhive.info/2015/09/android-material-design-floating-labels-for-edittext/)  
 - [Android Material Design working with Tabs](http://www.androidhive.info/2015/09/android-material-design-working-with-tabs/)  
 - [Android Creating Gmail Like Inbox using RecyclerView](http://www.androidhive.info/2017/02/android-creating-gmail-like-inbox-using-recyclerview/)  
 ![图片](http://www.androidhive.info/wp-content/uploads/2017/02/demo-gif-high-resolution.gif)

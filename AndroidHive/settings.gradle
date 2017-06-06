@@ -1,1 +1,1 @@
-include ':app', ':cardview', ':webview', ':floatinglabels'
+include ':app', ':cardview', ':webview', ':floatinglabels', ':swiperefresh'
