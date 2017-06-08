@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SwipeRefresh</string>
+    <string name="app_title">IMDB Top 250</string>
 </resources>

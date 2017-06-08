@@ -1,13 +1,17 @@
 # Android滑动刷新ListView教程
+
 [Android滑动刷新ListView教程](http://www.androidhive.info/2015/05/android-swipe-down-to-refresh-listview-tutorial/)
+
+效果：
+![](http://www.androidhive.info/wp-content/uploads/2015/05/android-swipe-down-to-refresh-listview-tutorial.png)
+
+
 
 利用SwipeRefreshLayout来检测任何视图中的垂直滑动。每次下拉刷新就获取下一组（每组20部）电影并进行显示。
 
 IMDB中评分前250的电影。
 
 将要检测向下滑动的View作为SwipeRefreshLayout的子View即可。使用SwipeRefreshLayout.OnRefreshListener进行监听。
-
-
 
 
 ## 知识点
