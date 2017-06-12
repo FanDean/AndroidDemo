@@ -24,14 +24,12 @@
 
         <!-- 标签页的显示设置：使用固定标签页并填充TabLayout-->
 
-<!--
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
             app:tabMode="fixed"/>
--->
 
 
         <!-- 标签页的显示：使用滑动标签页-->
@@ -44,12 +42,12 @@
      -->
 
         <!-- 最后自定义icon和text使用，更改了高度的属性值 -->
-        <android.support.design.widget.TabLayout
+<!--        <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="@dimen/custom_tab_layout_height"
             app:tabGravity="fill"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed"/>-->
 
     </android.support.design.widget.AppBarLayout>
 

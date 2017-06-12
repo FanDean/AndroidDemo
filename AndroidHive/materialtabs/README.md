@@ -16,7 +16,7 @@ TabLayout.Tab代表了Tab实例；你可以通过`newTab()`方法创建Tab，通
 ```
 TabLayout tabLayout = ...;
 tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
- ```
+```
 
 单独使用时，还需设置各种监听，比如 `setOnTabSelectedListener(OnTabSelectedListener)`。
 
@@ -53,6 +53,18 @@ TabLayout两个重要的xml属性：
 ## TabLayout与ViewPager的整合
 
 使用 TabLayout + ViewPager + Fragment 的形式可以大大简化代码。
+
+
+**ViewPager切换Fragment(支持库版本)：**  
+
+要想管理支持库版本的Fragment可以使用FragmentActivity来管理，而AppCompatActivity是继承了ragmentActivity的。
+
+Activity 为ViewPager的FragmentPagerAdapter（为Fragment做了优化的Adapter）提供FragmentManager（fm）；适配器通过fm创建的事务切换Fragment，并在适配器的getItem()方法中返回当前显示的Fragment。
+
+
+**TabLayout 与 ViewPager关联:** 
+
+> 具体原理未知
 
 调用TabLayout的`setupWithViewPager(ViewPager)`方法来连接到ViewPager；此时，
 PagerAdapter将自动填充它的页面标题到TabLayout。而其标题可通过下面的方法设定：
@@ -98,7 +110,6 @@ TextView可以通过`setCompoundDrawablesWithIntrinsicBounds();`设置文字上�
 这样自定义的View显示效果不怎么好，另一种自定义的View见参考5、6。
 
 相对更完整的示例见参考3.
-
 
 ---
 

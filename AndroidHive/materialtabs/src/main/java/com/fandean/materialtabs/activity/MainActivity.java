@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setupWithViewPager(mViewPager);
 
         //设置图标
-//        setupTabIcons();
+        setupTabIcons();
         //设置自定义的View时使用(图片在下)
 //        setupCustemTabIcons();
         //设置自定义的View时使用(图片在右)
 //        setupCustomRightTabIcons();
-        setupCustomTopTabIcons();
+//        setupCustomTopTabIcons();
     }
 
     private void setupViewPager(ViewPager viewPager) {

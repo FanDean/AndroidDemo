@@ -9,6 +9,10 @@
 - CardView
 - RecyclerView
 - PopupMenu
+
+在RecyclerView中响应单个CardView中的溢出菜单的点击事件；在弹出的PopupMenu中，再响应对PopupMenu的点击。
+
+
 - CoordinatorLayout 在**布局文件中**较详细的做了注释
 - AppBarLayout 在**布局文件中**较详细的做了注释；对其偏移量进行了监听(出现了写问题)
 - CollapsingToolbarLayout 在**布局文件中**较详细的做了注释
