@@ -23,7 +23,17 @@ import java.util.List;
 public class FlickrFetchr {
     private static final String TAG = "FlickrFetchr";
     private static final String API_KEY = "7c2b35fd017fdfc481f2159ae99c4f62";
-
+    private static final String FETCH_RECENTS_METHOD = "flickr.photos.getRecent";
+    private static final String SEARCH_METHOD  = "flickr.photos.search";
+    private static final Uri ENDPOINT = Uri
+            .parse("https://api.flickr.com/services/rest/")
+            .buildUpon()
+            .appendQueryParameter("api_key",API_KEY)
+            .appendQueryParameter("format","json")
+            .appendQueryParameter("nojsoncallback","1")
+            //如有小图片，也一并返回其URL
+            .appendQueryParameter("extras","url_s")
+            .build();
 
     /**
      * API文档页： https://www.flickr.com/services/api/
@@ -31,19 +41,10 @@ public class FlickrFetchr {
      * REST 是要使用的最簡單的要求格式 - 它是簡單的 HTTP GET 或 POST 動作。
      * The REST Endpoint URL is https://api.flickr.com/services/rest/
      */
-    public List<GalleryItem> fetchItems(){
+    private List<GalleryItem> downloadGalleryItems(String url){
         List<GalleryItem> items = new ArrayList<>();
 
         try {
-            String url = Uri.parse("https://api.flickr.com/services/rest/")
-                .buildUpon()
-                .appendQueryParameter("method","flickr.photos.getRecent")
-                .appendQueryParameter("api_key",API_KEY)
-                .appendQueryParameter("format","json")
-                .appendQueryParameter("nojsoncallback","1")
-                //如有小图片，也一并返回其URL
-                .appendQueryParameter("extras","url_s")
-                .build().toString();
             String jsonString = getUrlString(url);
             Logger.d("url: "+ url + "\n JsonSize: "+ jsonString.length());
 //            Logger.json(jsonString);
@@ -56,6 +57,29 @@ public class FlickrFetchr {
             Logger.e("Failed to parse JSON", e);
         }
         return items;
+    }
+
+
+    private String buildUrl(String method, String query){
+        Uri.Builder uriBuilder = ENDPOINT.buildUpon()
+                .appendQueryParameter("method",method);
+
+        if (method.equals(SEARCH_METHOD)){
+            uriBuilder.appendQueryParameter("text",query);
+        }
+        return uriBuilder.build().toString();
+    }
+
+
+    public List<GalleryItem> fetchRecentPhotos(){
+        String url = buildUrl(FETCH_RECENTS_METHOD,null);
+        return downloadGalleryItems(url);
+    }
+
+
+    public List<GalleryItem> searchPhotos(String query){
+        String url = buildUrl(SEARCH_METHOD,query);
+        return downloadGalleryItems(url);
     }
 
 
