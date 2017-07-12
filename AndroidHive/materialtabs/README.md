@@ -57,7 +57,7 @@ TabLayout两个重要的xml属性：
 
 **ViewPager切换Fragment(支持库版本)：**  
 
-要想管理支持库版本的Fragment可以使用FragmentActivity来管理，而AppCompatActivity是继承了ragmentActivity的。
+要想管理支持库版本的Fragment可以使用FragmentActivity来管理，而AppCompatActivity是继承了FragmentActivity的。
 
 Activity 为ViewPager的FragmentPagerAdapter（为Fragment做了优化的Adapter）提供FragmentManager（fm）；适配器通过fm创建的事务切换Fragment，并在适配器的getItem()方法中返回当前显示的Fragment。
 

@@ -36,5 +36,6 @@ AndroidHive目录下的Demo全部参考[AndroidHive](http://www.androidhive.info
 - [Android How to Add Fingerprint Authentication](http://www.androidhive.info/2016/11/android-add-fingerprint-authentication/)  
 - [Android Twitter oAuth Connect Tutorial](http://www.androidhive.info/2012/09/android-twitter-oauth-connect-tutorial/) 太老了。现在使用oAuth2。
 - [Android GPS, Location Manager Tutorial](http://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/)  
+- [Android Implementing Preferences Settings Screen](http://www.androidhive.info/2017/07/android-implementing-preferences-settings-screen/ "Android Implementing Preferences Settings Screen")
 
 
