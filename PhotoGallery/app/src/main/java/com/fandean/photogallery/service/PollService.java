@@ -1,5 +1,6 @@
 package com.fandean.photogallery.service;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.Notification;
@@ -11,7 +12,6 @@ import android.net.ConnectivityManager;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 
 import com.fandean.photogallery.R;
 import com.fandean.photogallery.bean.GalleryItem;
@@ -29,10 +29,17 @@ import java.util.List;
 public class PollService extends IntentService {
     private static final String TAG = "PollService";
     private static final long POLL_INTERVAL = 1000 * 60; //60s
+    public static final String ACTION_SHOW_NOTIFICATION =
+            "com.fandean.photogallery.SHOW_NOTIFICATION";
+    public static final String PERM_PRIVATE =
+            "com.fandean.photogallery.PRIVATE";
 //    private static final long POLL_INTERVAL = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
+    public static final String REQUEST_CODE = "REQUEST_CODE";
+    public static final String NOTIFICATION = "NOTIFICATION";
 
-    public static Intent newIntent(Context context){
-        return new Intent(context,PollService.class);
+
+    public static Intent newIntent(Context context) {
+        return new Intent(context, PollService.class);
     }
 
     public PollService() {
@@ -41,7 +48,9 @@ public class PollService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        if (!isNetworkAvailableAndConnected()) return;
+        if (!isNetworkAvailableAndConnected()) {
+            return;
+        }
         Logger.i(TAG + "Received an intent: " + intent);
 
 
@@ -68,7 +77,7 @@ public class PollService extends IntentService {
             Resources resources = getResources();
             //构建PendingIntent，用于在点击消息后进入应用程序
             Intent i = PhotoGalleryActivity.newIntent(this);
-            PendingIntent pi = PendingIntent.getActivity(this,0,i,0);
+            PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
 
             Notification notification = new NotificationCompat.Builder(this)
                     .setTicker(resources.getString(R.string.new_pictures_title))
@@ -80,24 +89,29 @@ public class PollService extends IntentService {
                     //true表示，单击消息后，该消息会重消息抽屉中删除
                     .setAutoCancel(true)
                     //设置默认声音和闪光，如果是振动就需要添加相关权限
-                    .setDefaults(Notification.DEFAULT_SOUND|Notification.DEFAULT_LIGHTS)
+                    .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS)
                     .build();
 
-
             //从当前context中取出
-            NotificationManagerCompat notificationManager =
-                    NotificationManagerCompat.from(this);
-            //贴出消息
+//            NotificationManagerCompat notificationManager =
+//                    NotificationManagerCompat.from(this);
+            //贴出消息。
             //注意第一个整型参数，它表示该消息的id，在整个应用唯一(而不是整个系统)，
             // 如果使用同一ID发送两条消息，那么第二条消息会覆盖前一条。
-            notificationManager.notify(0,notification);
+//            notificationManager.notify(0, notification);
+
+            //发送broadcast intent,并使用自定义权限
+//            sendBroadcast(new Intent(ACTION_SHOW_NOTIFICATION), PERM_PRIVATE);
+
+            //改为发送有序广播
+            showBackgroundNotification(0, notification);
         }
-        QueryPreferences.setLastResultId(this,resultId);
+        QueryPreferences.setLastResultId(this, resultId);
     }
 
 
     /**
-     * 用于在没有Activity时，运行后台服务
+     * 用于在没有Activity时，运行后台服务.
      * 可以利用系统服务AlarmManager发送Intent
      * 使用PendingIntent打包intent，再利用它将intent发送给AlarmManager
      *
@@ -120,20 +134,29 @@ public class PollService extends IntentService {
             //撤销PendingIntent
             pi.cancel();
         }
+        QueryPreferences.setAlarmOn(context, isOn);
     }
 
     //通过检查PendingIntent是否存在，来判断定时器是否激活
-    public static boolean isServiceAlarmOn(Context context){
+    public static boolean isServiceAlarmOn(Context context) {
         Intent intent = PollService.newIntent(context);
         //通过传入flag_no_create标识，来判断PendingIntent是否存在，
         // 不存在则返回null,而不是创建它(上文中传入0的情况)。
         PendingIntent pi = PendingIntent
-                .getService(context,0,intent,PendingIntent.FLAG_NO_CREATE);
+                .getService(context, 0, intent, PendingIntent.FLAG_NO_CREATE);
         return pi != null;
     }
 
+
+    private void showBackgroundNotification(int requestCode, Notification notification) {
+        Intent i = new Intent(ACTION_SHOW_NOTIFICATION);
+        i.putExtra(REQUEST_CODE, requestCode);
+        i.putExtra(NOTIFICATION, notification);
+        sendOrderedBroadcast(i, PERM_PRIVATE, null, null, Activity.RESULT_OK, null, null);
+    }
+
     //判断网络是否连接
-    private boolean isNetworkAvailableAndConnected(){
+    private boolean isNetworkAvailableAndConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         boolean isNetworkAvailable = cm.getActiveNetworkInfo() != null;
         boolean isNetworkConnected = isNetworkAvailable &&  //是否找得到可用网络

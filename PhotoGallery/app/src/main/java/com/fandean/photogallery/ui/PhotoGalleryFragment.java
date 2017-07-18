@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -34,11 +33,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+
+
+//import butterknife.BindView;
+//import butterknife.ButterKnife;
+//import butterknife.Unbinder;
+
+
 /**
+ * This inspection integrates CheckStyle and reports in real-time on problems
+ * against the current CheckStyle profile.
  * Created by fan on 17-7-10.
  */
 
-public class PhotoGalleryFragment extends Fragment {
+public class PhotoGalleryFragment extends VisibleFragment {
     private static final String TAG = "PhotoGalleryFragment";
     @BindView(R.id.fragment_photo_gallery_recycler_view)
     RecyclerView mPhotoRecyclerView;
@@ -73,7 +81,8 @@ public class PhotoGalleryFragment extends Fragment {
 
         //创建并启动获取图片的线程
         mThumbnailDownloader = new ThumbnailDownloader<>(responseHandler);
-        mThumbnailDownloader.setThumbnailDownloadListener(new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
+        mThumbnailDownloader.setThumbnailDownloadListener(
+                new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
             @Override
             public void onThumbnailDownloaded(PhotoHolder target, Bitmap thumbnail) {
                 Drawable drawable = new BitmapDrawable(getResources(), thumbnail);
@@ -89,7 +98,8 @@ public class PhotoGalleryFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_photo_gallery, container, false);
         //ButterKnife无法正常工作
         unbinder = ButterKnife.bind(this, view);
@@ -104,7 +114,7 @@ public class PhotoGalleryFragment extends Fragment {
     }
 
     private void setupAdapter() {
-        if (isAdded()) {//判断fragment是否已经添加到activity
+        if (isAdded()) { //判断fragment是否已经添加到activity
             mPhotoRecyclerView.setAdapter(new PhotoAdapter(mItems));
         }
     }
@@ -153,7 +163,7 @@ public class PhotoGalleryFragment extends Fragment {
         });
 
         MenuItem toggleItem = menu.findItem(R.id.menu_item_toggle_polling);
-        if (PollService.isServiceAlarmOn(getActivity())){
+        if (PollService.isServiceAlarmOn(getActivity())) {
             toggleItem.setTitle(R.string.stop_polling);
         } else {
             toggleItem.setTitle(R.string.start_polling);
@@ -169,7 +179,7 @@ public class PhotoGalleryFragment extends Fragment {
                 return true;
             case R.id.menu_item_toggle_polling:
                 boolean shouldStartAlarm = !PollService.isServiceAlarmOn(getActivity());
-                PollService.setServiceAlarm(getActivity(),shouldStartAlarm);
+                PollService.setServiceAlarm(getActivity(), shouldStartAlarm);
                 //通知重建菜单
                 getActivity().invalidateOptionsMenu();
                 return true; //消费事件
